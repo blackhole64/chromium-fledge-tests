@@ -4,6 +4,7 @@ import json
 import logging
 import os
 import pathlib
+import random
 import shutil
 import sys
 import unittest
@@ -69,6 +70,9 @@ class BaseTest(unittest.TestCase):
         return options
 
     def setUp(self) -> None:
+        # initialize the random number generator with the current system time
+        random.seed()
+
         if os.path.exists(PROFILE_DIR):
             shutil.rmtree(PROFILE_DIR)
 

@@ -84,7 +84,7 @@ class WorkletsConcurrencyTest(BaseTest):
         execution_mode = generate_execution_mode() if execution_mode is None else execution_mode
         assert execution_mode in ['compatibility', 'frozen-context', 'group-by-origin']
         with MeasureDuration("joinAdInterestGroup"):
-            self.driver.get(buyer_server.address + "?name=" + name + "&bid=" + str(bid))
+            self.driver.get(buyer_server.address + "?name=" + name + "&executionMode=" + execution_mode + "&bid=" + str(bid))
             self.assertDriverContainsText('body', 'joined interest group')
 
     def runAdAuction(self, seller_server, *buyer_servers):

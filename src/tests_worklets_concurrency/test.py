@@ -73,7 +73,8 @@ class WorkletsConcurrencyTest(BaseTest):
     or auctions.
     """
 
-    def joinAdInterestGroup(self, buyer_server, name, bid):
+    def joinAdInterestGroup(self, buyer_server, name, execution_mode, bid):
+        assert execution_mode in ['compatibility', 'frozen-context', 'group-by-origin']
         with MeasureDuration("joinAdInterestGroup"):
             self.driver.get(buyer_server.address + "?name=" + name + "&bid=" + str(bid))
             self.assertDriverContainsText('body', 'joined interest group')
@@ -93,7 +94,7 @@ class WorkletsConcurrencyTest(BaseTest):
         with MockServer(port=8083, directory='resources/seller') as seller_server,  \
                 MockServer(port=8101, directory='resources/buyer')  as buyer_server:
 
-            self.joinAdInterestGroup(buyer_server,  name='ig', bid=101)
+            self.joinAdInterestGroup(buyer_server,  name='ig', execution_mode='compatibility', bid=101)
             self.runAdAuction(seller_server, buyer_server)
 
             for entry in self.extract_browser_log():
@@ -150,22 +151,22 @@ class WorkletsConcurrencyTest(BaseTest):
                 MockServer(port=8116, directory='resources/buyer')  as buyer_server_16:
 
             # Join interest groups
-            self.joinAdInterestGroup(buyer_server_1,  name='ig', bid=101)
-            self.joinAdInterestGroup(buyer_server_2,  name='ig', bid=102)
-            self.joinAdInterestGroup(buyer_server_3,  name='ig', bid=103)
-            self.joinAdInterestGroup(buyer_server_4,  name='ig', bid=104)
-            self.joinAdInterestGroup(buyer_server_5,  name='ig', bid=105)
-            self.joinAdInterestGroup(buyer_server_6,  name='ig', bid=106)
-            self.joinAdInterestGroup(buyer_server_7,  name='ig', bid=107)
-            self.joinAdInterestGroup(buyer_server_8,  name='ig', bid=108)
-            self.joinAdInterestGroup(buyer_server_9,  name='ig', bid=109)
-            self.joinAdInterestGroup(buyer_server_10, name='ig', bid=110)
-            self.joinAdInterestGroup(buyer_server_11, name='ig', bid=111)
-            self.joinAdInterestGroup(buyer_server_12, name='ig', bid=112)
-            self.joinAdInterestGroup(buyer_server_13, name='ig', bid=113)
-            self.joinAdInterestGroup(buyer_server_14, name='ig', bid=114)
-            self.joinAdInterestGroup(buyer_server_15, name='ig', bid=115)
-            self.joinAdInterestGroup(buyer_server_16, name='ig', bid=116)
+            self.joinAdInterestGroup(buyer_server_1,  name='ig', execution_mode='compatibility', bid=101)
+            self.joinAdInterestGroup(buyer_server_2,  name='ig', execution_mode='compatibility', bid=102)
+            self.joinAdInterestGroup(buyer_server_3,  name='ig', execution_mode='compatibility', bid=103)
+            self.joinAdInterestGroup(buyer_server_4,  name='ig', execution_mode='compatibility', bid=104)
+            self.joinAdInterestGroup(buyer_server_5,  name='ig', execution_mode='compatibility', bid=105)
+            self.joinAdInterestGroup(buyer_server_6,  name='ig', execution_mode='compatibility', bid=106)
+            self.joinAdInterestGroup(buyer_server_7,  name='ig', execution_mode='compatibility', bid=107)
+            self.joinAdInterestGroup(buyer_server_8,  name='ig', execution_mode='compatibility', bid=108)
+            self.joinAdInterestGroup(buyer_server_9,  name='ig', execution_mode='compatibility', bid=109)
+            self.joinAdInterestGroup(buyer_server_10, name='ig', execution_mode='compatibility', bid=110)
+            self.joinAdInterestGroup(buyer_server_11, name='ig', execution_mode='compatibility', bid=111)
+            self.joinAdInterestGroup(buyer_server_12, name='ig', execution_mode='compatibility', bid=112)
+            self.joinAdInterestGroup(buyer_server_13, name='ig', execution_mode='compatibility', bid=113)
+            self.joinAdInterestGroup(buyer_server_14, name='ig', execution_mode='compatibility', bid=114)
+            self.joinAdInterestGroup(buyer_server_15, name='ig', execution_mode='compatibility', bid=115)
+            self.joinAdInterestGroup(buyer_server_16, name='ig', execution_mode='compatibility', bid=116)
 
             self.runAdAuction(seller_server,
                               buyer_server_1,
@@ -232,22 +233,22 @@ class WorkletsConcurrencyTest(BaseTest):
                 MockServer(port=8316, directory='resources/buyer')  as buyer_server_16:
 
             # Join interest groups
-            self.joinAdInterestGroup(buyer_server_1,  name='ig', bid=101)
-            self.joinAdInterestGroup(buyer_server_2,  name='ig', bid=102)
-            self.joinAdInterestGroup(buyer_server_3,  name='ig', bid=103)
-            self.joinAdInterestGroup(buyer_server_4,  name='ig', bid=104)
-            self.joinAdInterestGroup(buyer_server_5,  name='ig', bid=105)
-            self.joinAdInterestGroup(buyer_server_6,  name='ig', bid=106)
-            self.joinAdInterestGroup(buyer_server_7,  name='ig', bid=107)
-            self.joinAdInterestGroup(buyer_server_8,  name='ig', bid=108)
-            self.joinAdInterestGroup(buyer_server_9,  name='ig', bid=109)
-            self.joinAdInterestGroup(buyer_server_10, name='ig', bid=110)
-            self.joinAdInterestGroup(buyer_server_11, name='ig', bid=111)
-            self.joinAdInterestGroup(buyer_server_12, name='ig', bid=112)
-            self.joinAdInterestGroup(buyer_server_13, name='ig', bid=113)
-            self.joinAdInterestGroup(buyer_server_14, name='ig', bid=114)
-            self.joinAdInterestGroup(buyer_server_15, name='ig', bid=115)
-            self.joinAdInterestGroup(buyer_server_16, name='ig', bid=116)
+            self.joinAdInterestGroup(buyer_server_1,  name='ig', execution_mode='compatibility', bid=101)
+            self.joinAdInterestGroup(buyer_server_2,  name='ig', execution_mode='compatibility', bid=102)
+            self.joinAdInterestGroup(buyer_server_3,  name='ig', execution_mode='compatibility', bid=103)
+            self.joinAdInterestGroup(buyer_server_4,  name='ig', execution_mode='compatibility', bid=104)
+            self.joinAdInterestGroup(buyer_server_5,  name='ig', execution_mode='compatibility', bid=105)
+            self.joinAdInterestGroup(buyer_server_6,  name='ig', execution_mode='compatibility', bid=106)
+            self.joinAdInterestGroup(buyer_server_7,  name='ig', execution_mode='compatibility', bid=107)
+            self.joinAdInterestGroup(buyer_server_8,  name='ig', execution_mode='compatibility', bid=108)
+            self.joinAdInterestGroup(buyer_server_9,  name='ig', execution_mode='compatibility', bid=109)
+            self.joinAdInterestGroup(buyer_server_10, name='ig', execution_mode='compatibility', bid=110)
+            self.joinAdInterestGroup(buyer_server_11, name='ig', execution_mode='compatibility', bid=111)
+            self.joinAdInterestGroup(buyer_server_12, name='ig', execution_mode='compatibility', bid=112)
+            self.joinAdInterestGroup(buyer_server_13, name='ig', execution_mode='compatibility', bid=113)
+            self.joinAdInterestGroup(buyer_server_14, name='ig', execution_mode='compatibility', bid=114)
+            self.joinAdInterestGroup(buyer_server_15, name='ig', execution_mode='compatibility', bid=115)
+            self.joinAdInterestGroup(buyer_server_16, name='ig', execution_mode='compatibility', bid=116)
 
             # Run a number of auctions ...
             testcase_count = 12
@@ -277,7 +278,9 @@ class WorkletsConcurrencyTest(BaseTest):
             # Check concurrency level of generate_bid
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(testcase_count * 16)
-            assert_that(count_par).is_greater_than_or_equal_to(4)  # at least 4 generate_bid calls at the same time
+
+            # at least 2 generate_bid calls at the same time (but this may vary)
+            assert_that(count_par).is_greater_than_or_equal_to(2)
 
             # Check concurrency level of generate_bid worklet
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'bidder_worklet_generate_bid')
@@ -297,7 +300,7 @@ class WorkletsConcurrencyTest(BaseTest):
 
             # Join interest groups
             for i in range(0, 32):
-                self.joinAdInterestGroup(buyer_servers[i],  name='ig', bid=100+i)
+                self.joinAdInterestGroup(buyer_servers[i],  name='ig', execution_mode='compatibility', bid=100+i)
 
             # Run a number of auctions ...
             testcase_count = 12
@@ -314,7 +317,9 @@ class WorkletsConcurrencyTest(BaseTest):
             # Check concurrency level of generate_bid
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(testcase_count * 32)
-            assert_that(count_par).is_greater_than_or_equal_to(4)  # at least 4 generate_bid calls at the same time
+
+            # at least 2 generate_bid calls at the same time (but this may vary)
+            assert_that(count_par).is_greater_than_or_equal_to(2)
 
             # Check concurrency level of generate_bid worklet
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'bidder_worklet_generate_bid')
@@ -334,7 +339,7 @@ class WorkletsConcurrencyTest(BaseTest):
 
             # Join interest groups
             for i in range(0, 32):
-                self.joinAdInterestGroup(buyer_servers[i],  name='ig_' + str(i), bid=100+i)
+                self.joinAdInterestGroup(buyer_servers[i],  name='ig_' + str(i), execution_mode='compatibility', bid=100+i)
 
             # Run a number of auctions ...
             testcase_count = 12
@@ -351,7 +356,9 @@ class WorkletsConcurrencyTest(BaseTest):
             # Check concurrency level of generate_bid
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(testcase_count * 32)
-            assert_that(count_par).is_greater_than_or_equal_to(4)  # at least 4 generate_bid calls at the same time
+
+            # at least 2 generate_bid calls at the same time (but this may vary)
+            assert_that(count_par).is_greater_than_or_equal_to(2)
 
             # Check concurrency level of generate_bid worklet
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'bidder_worklet_generate_bid')

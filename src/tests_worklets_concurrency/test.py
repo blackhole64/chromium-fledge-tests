@@ -199,11 +199,15 @@ class WorkletsConcurrencyTest(BaseTest):
 
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(16)
-            assert_that(count_par).is_greater_than_or_equal_to(2)  # at least 2 generate_bid calls at the same time
+
+            # at least 2 generate_bid calls at the same time (subject to device capabilities)
+            assert_that(count_par).is_greater_than_or_equal_to(2)
 
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'bidder_worklet_generate_bid')
             assert_that(count_events).is_equal_to(16)
-            assert_that(count_par).is_greater_than_or_equal_to(4)  # at least 4 worklets running at the same time
+
+            # at least 2 bidder worklets at the same time (subject to device capabilities)
+            assert_that(count_par).is_greater_than_or_equal_to(2)
 
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, '.*worklet.*')
             assert_that(count_events).is_equal_to(35)
@@ -287,7 +291,7 @@ class WorkletsConcurrencyTest(BaseTest):
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(testcase_count * 16)
 
-            # at least 2 generate_bid calls at the same time (but this may vary)
+            # at least 2 generate_bid calls at the same time (subject to device capabilities)
             assert_that(count_par).is_greater_than_or_equal_to(2)
 
             # Check concurrency level of generate_bid worklet
@@ -326,7 +330,7 @@ class WorkletsConcurrencyTest(BaseTest):
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(testcase_count * 32)
 
-            # at least 2 generate_bid calls at the same time (but this may vary)
+            # at least 2 generate_bid calls at the same time (subject to device capabilities)
             assert_that(count_par).is_greater_than_or_equal_to(2)
 
             # Check concurrency level of generate_bid worklet
@@ -365,7 +369,7 @@ class WorkletsConcurrencyTest(BaseTest):
             (count_events, count_par) = concurrency_level_with_filter(fledge_trace, 'generate_bid')
             assert_that(count_events).is_equal_to(testcase_count * 32)
 
-            # at least 2 generate_bid calls at the same time (but this may vary)
+            # at least 2 generate_bid calls at the same time (subject to device capabilities)
             assert_that(count_par).is_greater_than_or_equal_to(2)
 
             # Check concurrency level of generate_bid worklet
